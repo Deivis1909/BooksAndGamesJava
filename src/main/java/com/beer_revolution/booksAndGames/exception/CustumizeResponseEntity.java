@@ -39,8 +39,8 @@ public class CustumizeResponseEntity extends ResponseEntityExceptionHandler {
     // tratando a classe de exceção badRequest
     // que e do tipo funcao nativa do Spring de resposta do servidor/banco de ResponseEntity que
     // usa funcao criada de <ExceptionResponse> de parametro
-    @ExceptionHandler(UnsuportedMatch.class)
-    public final ResponseEntity<ExceptionResponse> handleBadRequest(Exception ex,WebRequest request){
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(Exception ex,WebRequest request){
 
         ExceptionResponse exceptionResponse = new ExceptionResponse(
 
@@ -50,7 +50,7 @@ public class CustumizeResponseEntity extends ResponseEntityExceptionHandler {
                 ex.getMessage(),
                 //descricao do erro
                 request.getDescription(false));
-        return new ResponseEntity<>(exceptionResponse,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(exceptionResponse,HttpStatus.NOT_FOUND);
 
 
 
