@@ -4,6 +4,7 @@ package com.beer_revolution.booksAndGames.controller;
 
 import com.beer_revolution.booksAndGames.model.Person;
 import com.beer_revolution.booksAndGames.service.PersonService;
+import com.beer_revolution.booksAndGames.vo.PersonVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class PersonController {
 
     //@RequestMapping(value = "/{id}",method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @GetMapping(value="/{id}")
-    public Person findBiId(@PathVariable(value = "id")Long id) throws Exception{
+    public PersonVo findBiId(@PathVariable(value = "id")Long id) throws Exception{
         return personService.findById(id);
 
 
@@ -29,7 +30,7 @@ public class PersonController {
     }
     //@RequestMapping(method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> findAll() {
+    public List<PersonVo> findAll() {
         return personService.findAll();
 
 
@@ -39,16 +40,16 @@ public class PersonController {
 
    // @RequestMapping(method= RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Person salvar(@RequestBody Person person){
+    public PersonVo salvar(@RequestBody PersonVo personVo){
 
-        return personService.salvar(person);
+        return personService.salvar(personVo);
     }
 
     //@RequestMapping(method = RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Person atualiza(@RequestBody Person person){
+    public PersonVo atualiza(@RequestBody PersonVo personVo){
 
-        return personService.update(person);
+        return personService.update(personVo);
 
 
     }
