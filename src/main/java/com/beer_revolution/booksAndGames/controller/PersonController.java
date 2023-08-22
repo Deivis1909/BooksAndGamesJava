@@ -22,7 +22,7 @@ public class PersonController {
 
     //@RequestMapping(value = "/{id}",method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @GetMapping(value="/{id}")
-    public PersonVo findBiId(@PathVariable(value = "id")Long id) throws Exception{
+    public PersonVo findById(@PathVariable(value = "id")Long id) throws Exception{
         return personService.findById(id);
 
 
@@ -40,14 +40,14 @@ public class PersonController {
 
    // @RequestMapping(method= RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public PersonVo salvar(@RequestBody PersonVo personVo){
+    public PersonVo salvar(@RequestBody PersonVo personVo) throws Exception {
 
         return personService.salvar(personVo);
     }
 
     //@RequestMapping(method = RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public PersonVo atualiza(@RequestBody PersonVo personVo){
+    public PersonVo atualiza(@RequestBody PersonVo personVo) throws Exception {
 
         return personService.update(personVo);
 
