@@ -1,5 +1,8 @@
 package com.beer_revolution.booksAndGames.service;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+import com.beer_revolution.booksAndGames.controller.PersonController;
 import com.beer_revolution.booksAndGames.exception.ResourceNotFoundException;
 import com.beer_revolution.booksAndGames.mapper.DozerMapper;
 import com.beer_revolution.booksAndGames.model.Person;
@@ -24,14 +27,21 @@ public class PersonService {
 
     private Logger logger = Logger.getLogger(PersonService.class.getName());
 
-    public PersonVo findById(Long id){
+    public PersonVo findById(Long id) throws Exception {
 
         logger.info("finding one person buscando uma pessoa");
 
         var entity = personRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
-        return DozerMapper.parseObject(entity, PersonVo.class);
+
+
+        var vo = DozerMapper.parseObject(entity, PersonVo.class);
+
+        // aplicando Hateos
+        // construindo a variavek de retotno que retorna um findbyid withselfRel = auto relacionamento que aparece o link da procura
+        vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+        return vo;
 
 
     }
@@ -42,13 +52,25 @@ public class PersonService {
                 "0,");
 
 
-        return DozerMapper.parseListObject(personRepository.findAll(), PersonVo.class);
+       var persons = DozerMapper.parseListObject(personRepository.findAll(), PersonVo.class);
+        persons
+                .stream()
+                .forEach(p -> {
+                    try {
+                        p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+       return persons;
 
     }
 
 
 
-    public PersonVo salvar(PersonVo personVo){
+    public PersonVo salvar(PersonVo personVo) throws Exception {
+
+
 
         logger.info("salve one person");
 
@@ -60,13 +82,16 @@ public class PersonService {
         // salvando entity personVo no banco e
         // covertendo a entidade obeto persom em uma variavel personVo para retornar Vo
         var vo = DozerMapper.parseObject(personRepository.save(entity),PersonVo.class);
+        // aplicando Hateos
+        // construindo a variavek de retotno que retorna um findbyid withselfRel = auto relacionamento que aparece o link da procura
+        vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
         return vo;
 
     }
-    public PersonVo update(PersonVo personVo){
+    public PersonVo update(PersonVo personVo) throws Exception {
         logger.info("atualizado a pessoa com sucesso");
 
-       var entity =  personRepository.findById(personVo.getId())
+       var entity =  personRepository.findById(personVo.getKey())
                 .orElseThrow(()-> new ResourceNotFoundException("no records found for this id"));
         entity.setEmail(personVo.getEmail());
         entity.setGender(personVo.getGender());
@@ -76,6 +101,9 @@ public class PersonService {
         // salvando entity personVo no banco e
         // covertendo a entidade obeto persom em uma variavel personVo para retornar Vo
         var vo = DozerMapper.parseObject(personRepository.save(entity),PersonVo.class);
+        // aplicando Hateos
+        // construindo a variavek de retotno que retorna um findbyid withselfRel = auto relacionamento que aparece o link da procura
+        vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
         return vo;
 
     }
