@@ -1,6 +1,4 @@
 package com.beer_revolution.booksAndGames.service;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import com.beer_revolution.booksAndGames.controller.PersonController;
 import com.beer_revolution.booksAndGames.exception.ResourceNotFoundException;
@@ -10,14 +8,12 @@ import com.beer_revolution.booksAndGames.repository.PersonRepository;
 import com.beer_revolution.booksAndGames.vo.PersonVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class PersonService {
@@ -27,14 +23,17 @@ public class PersonService {
 
     private Logger logger = Logger.getLogger(PersonService.class.getName());
 
+
     public PersonVo findById(Long id) throws Exception {
 
         logger.info("finding one person buscando uma pessoa");
 
+        // vai no repositorio/banco de dados que pega um person pelo id
         var entity = personRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
 
+        // armazenando tudo numa variavels
 
         var vo = DozerMapper.parseObject(entity, PersonVo.class);
 
@@ -82,8 +81,8 @@ public class PersonService {
         // salvando entity personVo no banco e
         // covertendo a entidade obeto persom em uma variavel personVo para retornar Vo
         var vo = DozerMapper.parseObject(personRepository.save(entity),PersonVo.class);
-        // aplicando Hateos
-        // construindo a variavek de retotno que retorna um findbyid withselfRel = auto relacionamento que aparece o link da procura
+        // aplicando H A T E O S
+        // construindo a variavel ADDLINKTO FUNCAO DO HATEOS de retotno que retorna um findbyid withselfRel = auto relacionamento que aparece o link da procura
         vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
         return vo;
 
@@ -93,10 +92,10 @@ public class PersonService {
 
        var entity =  personRepository.findById(personVo.getKey())
                 .orElseThrow(()-> new ResourceNotFoundException("no records found for this id"));
-        entity.setEmail(personVo.getEmail());
+        entity.setFirstName(personVo.getFirstName());
+        entity.setLastName(personVo.getLastName());
+        entity.setAddress(personVo.getAddress());
         entity.setGender(personVo.getGender());
-        entity.setSurname(personVo.getSurname());
-        entity.setName(personVo.getName());
 
         // salvando entity personVo no banco e
         // covertendo a entidade obeto persom em uma variavel personVo para retornar Vo

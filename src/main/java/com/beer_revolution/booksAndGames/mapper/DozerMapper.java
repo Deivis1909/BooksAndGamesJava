@@ -6,6 +6,9 @@ import com.github.dozermapper.core.Mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// faz o mapa/copia do objeto  pra ser transitado , facilita o transito é uma copia do objeto DO VALUE OBJET PERSON VO para transito
+// VALOR DE ORIGIN E VALOR DE DESTINO
 public class DozerMapper {
 
     private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();

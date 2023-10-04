@@ -15,15 +15,15 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class PersonVo extends RepresentationModel<PersonVo> implements Serializable {
+//extends RepresentationModel é do HATEOS -> configura arquivo json de retorno para aperecer coisas como link
+
 
     @JsonProperty("id")
     @Mapping("id")
     private Long key;
-    private String name;
-    private String surname;
-    private String email;
-
+    private String firstName;
+    private String lastName;
+    private String address;
     private String gender;
-
 
 }
