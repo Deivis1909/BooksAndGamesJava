@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// @CROSSORIGIN CONFIGURAÇÃO DE CORS PARA HOSTS LOCAIS DIFERENTES ACESSAR
+@CrossOrigin(origins="http://localhost:8090")
 @RestController
 @RequestMapping("/person")
 public class PersonController {
@@ -29,6 +31,7 @@ public class PersonController {
 
     }
     //@RequestMapping(method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins="http://localhost:8090")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PersonVo> findAll() {
         return personService.findAll();
@@ -39,6 +42,7 @@ public class PersonController {
 
 
    // @RequestMapping(method= RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins="http://localhost:8090")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     public PersonVo salvar(@RequestBody PersonVo personVo) throws Exception {
 

@@ -9,7 +9,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+
+
+
+
+
+
 public class DozerConverterTest {
+
     MockPerson inputObject;
 
     @BeforeEach
@@ -21,9 +28,9 @@ public class DozerConverterTest {
     public void parseEntityToVOTest() {
         PersonVo output = DozerMapper.parseObject(inputObject.mockEntity(), PersonVo.class);
         assertEquals(Long.valueOf(0L), output.getKey());
-        assertEquals("First Name Test0", output.getName());
-        assertEquals(" SurName Test0", output.getSurname());
-        assertEquals("email Test0", output.getEmail());
+        assertEquals("First Name Test0", output.getFirstName());
+        assertEquals("Last Name Test0", output.getLastName());
+        assertEquals("Addres Test0", output.getAddress());
         assertEquals("Male", output.getGender());
     }
 
@@ -33,27 +40,25 @@ public class DozerConverterTest {
         PersonVo outputZero = outputList.get(0);
 
         assertEquals(Long.valueOf(0L), outputZero.getKey());
-        assertEquals("First Name Test0", outputZero.getName());
-        assertEquals(" SurName Test0", outputZero.getSurname());
-        assertEquals("email Test0", outputZero.getEmail());
+        assertEquals("First Name Test0", outputZero.getFirstName());
+        assertEquals("Last Name Test0", outputZero.getLastName());
+        assertEquals("Addres Test0", outputZero.getAddress());
         assertEquals("Male", outputZero.getGender());
-
-
 
         PersonVo outputSeven = outputList.get(7);
 
         assertEquals(Long.valueOf(7L), outputSeven.getKey());
-        assertEquals("First Name Test7", outputSeven.getName());
-        assertEquals("SurName Test7", outputSeven.getSurname());
-        assertEquals("Addres email Test7", outputSeven.getEmail());
+        assertEquals("First Name Test7", outputSeven.getFirstName());
+        assertEquals("Last Name Test7", outputSeven.getLastName());
+        assertEquals("Addres Test7", outputSeven.getAddress());
         assertEquals("Female", outputSeven.getGender());
 
         PersonVo outputTwelve = outputList.get(12);
 
         assertEquals(Long.valueOf(12L), outputTwelve.getKey());
-        assertEquals("First Name Test12", outputTwelve.getName());
-        assertEquals("SurName Test12", outputTwelve.getSurname());
-        assertEquals("Email Test12", outputTwelve.getGender());
+        assertEquals("First Name Test12", outputTwelve.getFirstName());
+        assertEquals("Last Name Test12", outputTwelve.getLastName());
+        assertEquals("Addres Test12", outputTwelve.getAddress());
         assertEquals("Male", outputTwelve.getGender());
     }
 
@@ -61,9 +66,9 @@ public class DozerConverterTest {
     public void parseVOToEntityTest() {
         Person output = DozerMapper.parseObject(inputObject.mockVO(), Person.class);
         assertEquals(Long.valueOf(0L), output.getId());
-        assertEquals("First Name Test0", output.getName());
-        assertEquals("SurName Test0", output.getSurname());
-        assertEquals("email Test0", output.getEmail());
+        assertEquals("First Name Test0", output.getFirstName());
+        assertEquals("Last Name Test0", output.getLastName());
+        assertEquals("Addres Test0", output.getAddress());
         assertEquals("Male", output.getGender());
     }
 
@@ -73,26 +78,25 @@ public class DozerConverterTest {
         Person outputZero = outputList.get(0);
 
         assertEquals(Long.valueOf(0L), outputZero.getId());
-        assertEquals("First Name Test0", outputZero.getName());
-        assertEquals("SurName Test0", outputZero.getSurname());
-        assertEquals("email Test0", outputZero.getEmail());
+        assertEquals("First Name Test0", outputZero.getFirstName());
+        assertEquals("Last Name Test0", outputZero.getLastName());
+        assertEquals("Addres Test0", outputZero.getAddress());
         assertEquals("Male", outputZero.getGender());
 
         Person outputSeven = outputList.get(7);
 
         assertEquals(Long.valueOf(7L), outputSeven.getId());
-        assertEquals("First Name Test7", outputSeven.getName());
-        assertEquals("surnameName Test7", outputSeven.getSurname());
-        assertEquals("email Test7", outputSeven.getEmail());
+        assertEquals("First Name Test7", outputSeven.getFirstName());
+        assertEquals("Last Name Test7", outputSeven.getLastName());
+        assertEquals("Addres Test7", outputSeven.getAddress());
         assertEquals("Female", outputSeven.getGender());
 
         Person outputTwelve = outputList.get(12);
 
         assertEquals(Long.valueOf(12L), outputTwelve.getId());
-        assertEquals("First Name Test12", outputTwelve.getName());
-        assertEquals(" SurName Test12", outputTwelve.getSurname());
-        assertEquals("email Test12", outputTwelve.getEmail());
+        assertEquals("First Name Test12", outputTwelve.getFirstName());
+        assertEquals("Last Name Test12", outputTwelve.getLastName());
+        assertEquals("Addres Test12", outputTwelve.getAddress());
         assertEquals("Male", outputTwelve.getGender());
     }
 }
-

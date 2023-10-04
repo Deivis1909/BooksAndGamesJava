@@ -6,7 +6,14 @@ import com.beer_revolution.booksAndGames.vo.PersonVo;
 import java.util.List;
 import java.util.ArrayList;
 
+
+
+
+
+
 public class MockPerson {
+
+
     public Person mockEntity() {
         return mockEntity(0);
     }
@@ -26,28 +33,29 @@ public class MockPerson {
     public List<PersonVo> mockVOList() {
         List<PersonVo> persons = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
-            persons.add(mockVO(i));
+            persons.add(mockVO());
         }
         return persons;
     }
 
+    //numero de parametro mokceia um id
     public Person mockEntity(Integer number) {
         Person person = new Person();
-        person.setName("name Test" + number);
-        person.setSurname("surName Test" + number);
+        person.setAddress("Addres Test" + number);
+        person.setFirstName("First Name Test" + number);
         person.setGender(((number % 2)==0) ? "Male" : "Female");
         person.setId(number.longValue());
-        person.setEmail("Last email Test" + number);
+        person.setLastName("Last Name Test" + number);
         return person;
     }
 
     public PersonVo mockVO(Integer number) {
         PersonVo person = new PersonVo();
-        person.setName("name Test" + number);
-        person.setSurname("surName Test" + number);
+        person.setAddress("Addres Test" + number);
+        person.setFirstName("First Name Test" + number);
         person.setGender(((number % 2)==0) ? "Male" : "Female");
         person.setKey(number.longValue());
-        person.setEmail("Last email Test" + number);
+        person.setLastName("Last Name Test" + number);
         return person;
     }
 
