@@ -22,6 +22,7 @@ public class PersonController {
     private PersonService personService;
 
 
+   // @CrossOrigin(origins="http://localhost:8090")
     //@RequestMapping(value = "/{id}",method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @GetMapping(value="/{id}")
     public PersonVo findById(@PathVariable(value = "id")Long id) throws Exception{
@@ -31,7 +32,8 @@ public class PersonController {
 
     }
     //@RequestMapping(method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin(origins="http://localhost:8090")
+
+    //@CrossOrigin(origins="http://localhost:8090")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PersonVo> findAll() {
         return personService.findAll();
@@ -42,7 +44,7 @@ public class PersonController {
 
 
    // @RequestMapping(method= RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin(origins="http://localhost:8090")
+    //@CrossOrigin(origins="http://localhost:8090")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     public PersonVo salvar(@RequestBody PersonVo personVo) throws Exception {
 
